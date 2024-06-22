@@ -1,8 +1,5 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Sidebar from "./components/sidebar/Sidebar";
-import { Route, Routes } from "react-router-dom";
-import Calendar from "./page/calendar/Calendar";
 
 function App() {
   return (
