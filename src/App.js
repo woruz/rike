@@ -1,17 +1,16 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Sidebar from "./components/sidebar/Sidebar";
+
+import Sidebar from "./components/sidebar/Sidebar.js";
+import RikeCalendar from "./page/rikeCalendar/RikeCalendar.js";
 
 function App() {
   return (
-    <>
-      <Sidebar />
-      {/* <Routes>
-        <Route />
-        <Route />
-        <Route />
-        <Route path="/calendar" element={<Calendar />}/>
-      </Routes> */}
-    </>
+    <Sidebar>
+      <Routes>
+        <Route path="/calendar" element={<RikeCalendar />}/>
+      </Routes>
+    </Sidebar>
   );
 }
 

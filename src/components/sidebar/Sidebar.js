@@ -22,7 +22,7 @@ const Sidebar = ({ children }) => {
         {...bind()}
         className={`fixed inset-y-0 left-0 transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out bg-gray-800 text-white w-[30vw] p-4`}
+        } transition-transform duration-300 ease-in-out bg-gray-800 text-white w-[20vw] p-4`}
       >
         <button onClick={toggleSidebar} className="focus:outline-none text-2xl">
           {isOpen ? <span>&#8592;</span> : <span>&#9776;</span>}
@@ -30,16 +30,7 @@ const Sidebar = ({ children }) => {
         <nav className={`${isOpen ? "block" : "hidden"}`}>
           <ul>
             <li className="mb-2">
-              <Link to="/">Home</Link>
-            </li>
-            <li className="mb-2">
-              <Link to="/about">About</Link>
-            </li>
-            <li className="mb-2">
-              <Link to="/services">Services</Link>
-            </li>
-            <li className="mb-2">
-              <Link to="/contact">Contact</Link>
+              <Link to="/calendar">Calendar</Link>
             </li>
           </ul>
         </nav>
@@ -47,7 +38,7 @@ const Sidebar = ({ children }) => {
       {/* Main Content */}
       <div
         className={`flex-1 p-4 ${
-          isOpen ? "ml-[30vw]" : ""
+          isOpen ? "ml-[20vw]" : ""
         } transition-margin duration-300 ease-in-out`}
       >
         <button onClick={toggleSidebar} className="focus:outline-none text-2xl">
