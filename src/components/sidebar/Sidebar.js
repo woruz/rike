@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDrag } from "@use-gesture/react";
+import { ProjectContext } from "../../context/ProjectContext";
+import useProject from "../../hooks/projects/useProject";
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [projectClicked, setProjectClicked] = useState(false)
+  const {selectedProject, setSelectedProject, setTasks, setProjects, allProjects } = useContext(ProjectContext);
+
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -15,9 +20,20 @@ const Sidebar = ({ children }) => {
     return memo;
   });
 
+  const handleProjectClick = (project) => {
+    if (selectedProject === project._id) {
+      setSelectedProject(null);
+      setTasks([]);
+    } else {
+      setSelectedProject(project._id);
+      setTasks(project);
+      setProjects(project)
+    }
+  };
+
+
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
       <div
         {...bind()}
         className={`fixed inset-y-0 left-0 transform ${
@@ -30,12 +46,26 @@ const Sidebar = ({ children }) => {
         <nav className={`${isOpen ? "block" : "hidden"}`}>
           <ul>
             <li className="mb-2">
+              <Link to="/project" onClick={() => {
+                setProjectClicked(!projectClicked)
+                setSelectedProject(null)
+              }}>Project</Link>
+              {projectClicked && (
+                <ul className="ml-4">
+                  {allProjects.length && allProjects.map((indivisual) => (
+                    <li key={indivisual._id} className="mb-2">
+                      <button onClick={(e) => handleProjectClick(indivisual)}><Link to='/project-details'>{indivisual.title}</Link></button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+            <li className="mb-2">
               <Link to="/calendar">Calendar</Link>
             </li>
           </ul>
         </nav>
       </div>
-      {/* Main Content */}
       <div
         className={`flex-1 p-4 ${
           isOpen ? "ml-[20vw]" : ""
